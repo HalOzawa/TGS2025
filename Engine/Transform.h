@@ -29,4 +29,9 @@ public:
 
 	//法線変形用行列を取得
 	XMMATRIX GetNormalMatrix();
+
+	static XMFLOAT3 Float3Add(XMFLOAT3 a, XMFLOAT3 b)
+	{
+		return XMFLOAT3(a.x + b.x, a.y + b.y, a.z + b.z);
+	}
 };

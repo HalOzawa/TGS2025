@@ -1,5 +1,6 @@
 #include "FBX.h"
 #include "Camera.h"
+#include "FbxParts.h"
 #include <filesystem>
 
 namespace fs = std::filesystem;
@@ -274,6 +275,16 @@ void FBX::Draw(Transform& transform)
 		}
 		//描画
 		Direct3D::pContext->DrawIndexed(indexCount_[i], 0, 0);
+	}
+}
+
+//レイキャスト（レイを飛ばして当たり判定）
+void FBX::RayCast(RayCastData* data)
+{
+	//すべてのパーツと判定
+	for (int i = 0; i < parts_.size(); i++)
+	{
+		parts_[i]->RayCast(data);
 	}
 }
 

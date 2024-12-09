@@ -2,6 +2,7 @@
 #include "Engine/Fbx.h"
 #include "Engine/Input.h"
 #include "Engine/Camera.h"
+#include "Stage.h"
 #include "Model.h"
 
 //ƒJƒƒ‰‚Ì§Œä
@@ -66,6 +67,20 @@ void Player::Update()
 	XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
 	pos = pos + dir * move;
 	XMStoreFloat3(&(transform_.position_), pos);
+
+	Stage* pStage = (Stage*)FindObject("Stage");
+	int hSmodel = pStage->GetModelHandle();
+
+	RayCastData data;
+	data.start = transform_.position_;
+	data.start.y = 0;
+	data.dir = XMFLOAT3({ 0,-1,0 });
+	Model::RayCast(hSmodel, &data);
+
+	if (data.hit == true)
+	{
+		transform_.position_.y = -data.dist + 0.5f;
+	}
 
 	if (Input::IsKeyDown(DIK_Z))
 	{

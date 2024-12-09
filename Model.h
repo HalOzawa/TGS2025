@@ -15,6 +15,10 @@ namespace Model
 	int Load(std::string filename);
 	void SetTransform(int hModel, Transform transform);
 	void Draw(int hModel);
+	//レイキャスト（レイを飛ばして当たり判定）　※未実装
+	//引数：handle	判定したいモデルの番号
+	//引数：data	必要なものをまとめたデータ
+	void RayCast(int handle, RayCastData* data);
 	void Release();
 }
 
